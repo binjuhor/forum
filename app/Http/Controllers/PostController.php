@@ -22,7 +22,11 @@ class PostController extends Controller
 
 	public function show(Post $post)
 	{
-		return new PostResource($post);
+        $post->load('user');
+
+		return inertia('Posts/Show', [
+            'post' => PostResource::make($post),
+        ]);
 	}
 
 	public function update(PostRequest $request, Post $post)
