@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
- use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
- use Illuminate\Database\Eloquent\Relations\HasMany;
- use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -35,12 +35,12 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array<int, string>
      */
-//    protected $hidden = [
-//        'password',
-//        'remember_token',
-//        'two_factor_recovery_codes',
-//        'two_factor_secret',
-//    ];
+    //    protected $hidden = [
+    //        'password',
+    //        'remember_token',
+    //        'two_factor_recovery_codes',
+    //        'two_factor_secret',
+    //    ];
 
     protected $visible = [
         'id',

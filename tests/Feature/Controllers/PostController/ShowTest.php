@@ -3,6 +3,7 @@
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Inertia\Testing\AssertableInertia;
+
 use function Pest\Laravel\get;
 
 it('can show a post', function () {
@@ -21,4 +22,3 @@ it('passes a post to the view', function () {
     get(route('posts.show', $post))
         ->assertHasResource('post', PostResource::make($post));
 });
-

@@ -9,14 +9,14 @@ use Illuminate\Support\Collection;
 
 class PostFactory extends Factory
 {
-	protected $model = Post::class;
+    protected $model = Post::class;
 
-	public function definition(): array
-	{
-		return [
-			'user_id' => User::factory(),
-			'title' => str(fake()->sentence)->beforeLast('.')->title(),
+    public function definition(): array
+    {
+        return [
+            'user_id' => User::factory(),
+            'title' => str(fake()->sentence)->beforeLast('.')->title(),
             'body' => Collection::times(4, fn () => fake()->realText(1250))->join(PHP_EOL.PHP_EOL),
-		];
-	}
+        ];
+    }
 }
