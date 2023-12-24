@@ -3,13 +3,21 @@
 This is a simple forum app built with Laravel 10.x. to demonstrate the use of Laravel 10.x. It is a simple forum app where users can create topics and reply to topics.
 Practice with Laravel 10.x. & TDD
 
+## Requirements
+
+- PHP 8.2
+- Composer
+- Yarn
+- Valet
+
 ## Installation
 
-1. Clone the repository
-2. Run `composer install`
-3. Run `npm install`
-4. Run `npm run dev`
-5. Run `php artisan migrate --seed`
+1. Clone the repo
+2. Run `composer install` to install PHP dependencies
+3. Setup a local database called `laravel`
+4. Run `composer setup` to setup the application
+5. Setup a working email driver like Mailtrap
+6. Run `valet link` to link the application to valet
 
 ## Feature
 
