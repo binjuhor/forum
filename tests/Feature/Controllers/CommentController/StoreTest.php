@@ -3,20 +3,21 @@
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\post;
 
 it('requires authentication', function () {
-   post(route('posts.comments.store', Post::factory()->create()))
-       ->assertRedirect(route('login'));
+    post(route('posts.comments.store', Post::factory()->create()))
+        ->assertRedirect(route('login'));
 });
 
-it('can store a comment', function(){
+it('can store a comment', function () {
     $user = User::factory()->create();
     $post = Post::factory()->create();
 
     actingAs($user)->post(route('posts.comments.store', $post), [
-        'body' => 'This is a comment'
+        'body' => 'This is a comment',
     ]);
 
     $this->assertDatabaseHas(Comment::class, [
@@ -26,32 +27,30 @@ it('can store a comment', function(){
     ]);
 });
 
-it('redirects to the post show page', function(){
+it('redirects to the post show page', function () {
     $post = Post::factory()->create();
 
     actingAs(User::factory()->create())
         ->post(route('posts.comments.store', $post), [
-            'body' => 'This is a comment'
+            'body' => 'This is a comment',
         ])
         ->assertRedirect(route('posts.show', $post));
 });
 
-it('requires a valid body', function($value){
+it('requires a valid body', function ($value) {
     $post = Post::factory()->create();
 
     actingAs(User::factory()->create())
         ->post(route('posts.comments.store', $post), [
-            'body' => $value
+            'body' => $value,
         ])
         ->assertInvalid('body');
 })->with([
     'null' => null,
     'empty' => '',
     'whitespace' => ' ',
-    'number' =>1,
+    'number' => 1,
     'float' => 1.5,
     'boolean' => true,
-    'string_length' => str_repeat('a', 2501)
+    'string_length' => str_repeat('a', 2501),
 ]);
-
-
