@@ -17,7 +17,7 @@
                         <InputError :message="commentForm.errors.body" class="mt-2"/>
                     </div>
 
-                    <PrimaryButton type="submit" class="mt-4" :disabled="commentForm.processing">Add Comment
+                    <PrimaryButton type="submit" class="mt-4" :class="{ 'opacity-25': commentForm.processing }" :disabled="commentForm.processing">Add Comment
                     </PrimaryButton>
                 </form>
 
