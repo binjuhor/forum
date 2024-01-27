@@ -6,7 +6,10 @@
         <div class="flex-1">
             <p class="mt-1 break-all">{{ comment.body }}</p>
             <span class="first-letter:uppercase block pt-1 text-xs text-gray-600">By {{ comment.user.name }} {{ relativeDate(comment.created_at)}} ago</span>
-            <div class="mt-2 text-right empty:hidden">
+            <div class="mt-2 flex justify-end space-x-3 empty:hidden">
+                <form  v-if="comment.can?.update" @submit.prevent="$emit('edit', comment.id)">
+                    <button type="submit" class="text-sm font-mono  hover:font-bold">Edit</button>
+                </form>
                 <form  v-if="comment.can?.delete" @submit.prevent="$emit('delete', comment.id)">
                     <button type="submit" class="text-sm font-mono text-red-700 hover:font-bold">Delete</button>
                 </form>
@@ -25,5 +28,5 @@
         },
     })
 
-    const emit = defineEmits(['delete'])
+    const emit = defineEmits(['delete', 'edit'])
 </script>
