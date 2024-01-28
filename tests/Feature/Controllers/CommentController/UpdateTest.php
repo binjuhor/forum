@@ -2,15 +2,16 @@
 
 use App\Models\Comment;
 use App\Models\User;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\put;
 
-it('requires authentication', function() {
+it('requires authentication', function () {
     put(route('comments.update', Comment::factory()->create()))
         ->assertRedirect(route('login'));
 });
 
-it('can update a comment', function() {
+it('can update a comment', function () {
     $comment = Comment::factory()->create(['body' => 'The is the old body']);
     $newBody = 'This is the new body';
 
@@ -59,5 +60,5 @@ it('requires a valid body', function ($body) {
     true,
     1,
     1.5,
-    str_repeat('a', 2501)
+    str_repeat('a', 2501),
 ]);
