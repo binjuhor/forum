@@ -52,6 +52,7 @@ import { router, useForm } from '@inertiajs/vue3'
 import TextArea from '@/Components/TextArea.vue'
 import InputError from '@/Components/InputError.vue'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
+import { useConfirm } from '@/Utilities/Composable/useConfirm.js'
 
 const props = defineProps(['post', 'comments'])
 
@@ -81,14 +82,29 @@ const addComment = () => commentForm.post(route('posts.comments.store', props.po
     onSuccess: () => commentForm.reset(),
 })
 
-const updateCommnent = () => commentForm.put(route('comments.update', {
-    comment: commentIdBeingEdited.value,
-    page: props.comments.meta.current_page,
-}), {
+const { confirmation } = useConfirm()
+
+const updateCommnent = async () => {
+    if(! await confirmation('Are you sure you want to update this comment?')) {
+        commentTextAreaRef.value?.focus()
+        return
+    }
+
+    commentForm.put(route('comments.update', {
+        comment: commentIdBeingEdited.value,
+        page: props.comments.meta.current_page,
+    }), {
+        preserveScroll: true,
+        onSuccess: cancelEditComment,
+    })
+}
+
+const deleteComment = async (commentId) => {
+    if (! await confirmation('Are you sure you want to delete this comment?')) {
+        return
+    }
+
+    router.delete(route('comments.destroy', { comment: commentId, page: props.comments.meta.current_page }), {
     preserveScroll: true,
-    onSuccess: cancelEditComment,
-})
-const deleteComment = (commentId) => router.delete(route('comments.destroy', { comment: commentId, page: props.comments.meta.current_page }), {
-    preserveScroll: true,
-})
+})}
 </script>
