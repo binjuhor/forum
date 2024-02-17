@@ -9,6 +9,11 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Post::class);
+    }
+
     public function index()
     {
         return inertia('Posts/Index', [
