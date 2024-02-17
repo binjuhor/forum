@@ -39,7 +39,7 @@ class CommentController extends Controller
 
         return to_route('posts.show', [
             'post' => $comment->post_id,
-            'page' => $request->query('page')
+            'page' => $request->query('page'),
         ])->banner('Comment updated.');
     }
 
@@ -52,7 +52,7 @@ class CommentController extends Controller
 
         return to_route('posts.show', [
             'post' => $comment->post_id,
-            'page' => $request->query('page')
+            'page' => $request->query('page'),
         ])->dangerBanner('Comment deleted.');
     }
 }

@@ -16,9 +16,21 @@ class PostController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return inertia('Posts/Create');
+    }
+
     public function store(PostRequest $request)
     {
-        return new PostResource(Post::create($request->validated()));
+        $data = $request->all();
+
+        $post = Post::create([
+            ...$data,
+            'user_id' => $request->user()->id,
+        ]);
+
+        return to_route('posts.show', $post)->banner('Post created.');
     }
 
     public function show(Post $post)
