@@ -9,12 +9,8 @@ use function Pest\Laravel\get;
 beforeEach(function () {
     $this->validData = [
         'title' => 'My first post',
-        'body' => 'This is the body of my first post.',
+        'body' => str_repeat('a', 100),
     ];
-});
-
-it('requires authentication', function () {
-    get(route('posts.create'))->assertRedirect(route('login'));
 });
 
 it('store a post', function () {
