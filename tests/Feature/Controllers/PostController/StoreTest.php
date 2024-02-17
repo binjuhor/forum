@@ -25,7 +25,7 @@ it('store a post', function () {
 
 it('redirects to the post show page', function () {
     actingAs(User::factory()->create())->post(route('posts.store'), $this->validData)
-        ->assertRedirect(route('posts.show', Post::latest('id')->first()));
+        ->assertRedirect(Post::latest('id')->first()->showRoute());
 });
 
 it('requires a valid data', function (array $badData, array|string $errors) {

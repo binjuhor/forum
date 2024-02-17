@@ -42,5 +42,5 @@ Route::middleware([
         ->only(['store', 'update', 'destroy']);
 });
 
-Route::get('posts/{post}/{slug?}', [PostController::class, 'show'])->name('posts.show');
+Route::get('posts/{post}/{slug}', [PostController::class, 'show'])->name('posts.show');
 Route::resource('posts', PostController::class)->only(['index']);
