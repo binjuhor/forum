@@ -4,7 +4,6 @@ use App\Models\Post;
 use App\Models\User;
 
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\get;
 
 beforeEach(function () {
     $this->validData = [
