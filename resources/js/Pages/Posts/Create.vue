@@ -12,7 +12,6 @@
                 <div class="mt-3">
                     <InputLabel for="body" value="Body" class="sr-only" />
                     <MarkdownEditor v-model="form.body" />
-                    <TextArea id="body" v-model="form.body" rows="25" class="mt-2" />
                     <InputError :message="form.errors.body" class="mt-2" />
                 </div>
 
