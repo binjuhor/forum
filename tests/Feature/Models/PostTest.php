@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Models\Post;
 
 it('users title case for titles', function () {

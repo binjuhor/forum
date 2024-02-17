@@ -25,7 +25,7 @@ class CommentController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
-        return to_route('posts.show', $post)->banner('Comment created.');
+        return redirect($post->showRoute())->banner('Comment created.');
     }
 
     /**
@@ -37,10 +37,8 @@ class CommentController extends Controller
             'body' => ['required', 'string', 'max:2500'],
         ]));
 
-        return to_route('posts.show', [
-            'post' => $comment->post_id,
-            'page' => $request->query('page'),
-        ])->banner('Comment updated.');
+        return redirect($comment->post->showRoute(['page' => $request->query('page')]))
+            ->banner('Comment updated.');
     }
 
     /**
@@ -50,9 +48,7 @@ class CommentController extends Controller
     {
         $comment->delete();
 
-        return to_route('posts.show', [
-            'post' => $comment->post_id,
-            'page' => $request->query('page'),
-        ])->dangerBanner('Comment deleted.');
+        return redirect($comment->post->showRoute(['page' => $request->query('page')]))
+            ->dangerBanner('Comment deleted.');
     }
 }

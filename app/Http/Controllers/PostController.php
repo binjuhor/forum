@@ -6,6 +6,8 @@ use App\Http\Requests\PostRequest;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -35,11 +37,15 @@ class PostController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
-        return to_route('posts.show', $post)->banner('Post created.');
+        return redirect($post->showRoute())->banner('Post created.');
     }
 
-    public function show(Post $post)
+    public function show(Request $request, Post $post)
     {
+        if (! Str::contains($post->showRoute(), $request->path())) {
+            return redirect($post->showRoute($request->query()), 301);
+        }
+
         $post->load('user');
 
         return inertia('Posts/Show', [
