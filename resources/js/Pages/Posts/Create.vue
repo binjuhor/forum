@@ -33,7 +33,6 @@ import InputError from '@/Components/InputError.vue'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
 import TextInput from '@/Components/TextInput.vue'
-import TextArea from '@/Components/TextArea.vue'
 import Container from '@/Components/Container.vue'
 import MarkdownEditor from '@/Components/MarkdownEditor.vue'
 
