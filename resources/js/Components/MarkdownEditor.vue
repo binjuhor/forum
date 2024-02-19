@@ -121,7 +121,30 @@
                     <i class="ri-h-3"></i>
                 </button>
             </li>
-
+            <li>
+                <button
+                    @click="editor.chain().focus().toggleCodeBlock().run()"
+                    type="button"
+                    class="px-3 py-2 hover:bg-gray-200"
+                    :class="{
+                        'bg-gray-200': editor.isActive('codeBlock' , { level: 4 })
+                    }"
+                >
+                    <i class="ri-code-block"></i>
+                </button>
+            </li>
+            <li>
+                <button
+                    @click="editor.chain().focus().toggleCode().run()"
+                    type="button"
+                    class="px-3 py-2 hover:bg-gray-200"
+                    :class="{
+                        'bg-gray-200': editor.isActive('code' , { level: 4 })
+                    }"
+                >
+                    <i class="ri-code-line"></i>
+                </button>
+            </li>
         </menu>
         <EditorContent :editor="editor" />
     </div>
