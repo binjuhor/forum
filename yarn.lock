@@ -338,6 +338,13 @@
   resolved "https://registry.npmjs.org/@tiptap/extension-italic/-/extension-italic-2.2.3.tgz"
   integrity sha512-SSsFuRnm4Y4Qnc6EuvmA4iarLCt/sg8qkqCKiNPjDUP5JR8HGESeoYVjQzprLHY8jusT9qoC26TP1Sin5vZmWQ==
 
+"@tiptap/extension-link@^2.2.3":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-link/-/extension-link-2.2.3.tgz#5c6571dffebbe328277b0abfae0deccfb20c2559"
+  integrity sha512-AKKgkllpj0Po/hi2bVz719OMqyB1nBhKU/Q05yeWVirOYwF2ZwfM4iK2Iab7xWUVhvlyIG3lrWFQL8A30yuqwQ==
+  dependencies:
+    linkifyjs "^4.1.0"
+
 "@tiptap/extension-list-item@^2.2.3":
   version "2.2.3"
   resolved "https://registry.npmjs.org/@tiptap/extension-list-item/-/extension-list-item-2.2.3.tgz"
@@ -1043,6 +1050,11 @@ linkify-it@^5.0.0:
   dependencies:
     uc.micro "^2.0.0"
 
+linkifyjs@^4.1.0:
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/linkifyjs/-/linkifyjs-4.1.3.tgz#0edbc346428a7390a23ea2e5939f76112c9ae07f"
+  integrity sha512-auMesunaJ8yfkHvK4gfg1K0SaKX/6Wn9g2Aac/NwX+l5VdmFZzo/hdPGxEOETj+ryRa4/fiOPjeeKURSAJx1sg==
+
 lodash.castarray@^4.4.0:
   version "4.4.0"
   resolved "https://registry.npmjs.org/lodash.castarray/-/lodash.castarray-4.4.0.tgz"
@@ -1515,6 +1527,11 @@ regenerator-runtime@^0.14.0:
   version "0.14.1"
   resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.14.1.tgz"
   integrity sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==
+
+remixicon@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/remixicon/-/remixicon-4.1.0.tgz#3a0068cef5f431473707f9d2a108968cd467c0aa"
+  integrity sha512-N5dmpN6bjB7GyHi8RqhKp8Fy1cfOch0m75KZQv4ZNFa2ffpXJY2FQ4TdgigZulTdwOoTwLKjBQ7GCC+bEw8LHg==
 
 resolve@^1.1.7, resolve@^1.22.2:
   version "1.22.8"
