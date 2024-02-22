@@ -163,6 +163,10 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    class: {
+        type: String,
+        default: 'min-h-[512px]',
+    },
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -181,7 +185,7 @@ const editor = useEditor({
     ],
     editorProps: {
         attributes: {
-            class: 'min-h-[512px] prose prose-sm max-w-none py-1.5 px-3',
+            class: `${props.class} prose prose-sm max-w-none py-1.5 px-3`,
         },
     },
     onUpdate() {

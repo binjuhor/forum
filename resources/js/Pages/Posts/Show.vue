@@ -13,7 +13,7 @@
                 <form v-if="$page.props.auth.user" @submit.prevent="() => commentIdBeingEdited ? updateCommnent() : addComment()">
                     <div>
                         <InputLabel for="body" class="sr-only">Comment</InputLabel>
-                        <TextArea ref="commentTextAreaRef" id="body" rows="4" v-model="commentForm.body" placeholder="Speak your mind Spoc..."/>
+                        <MarkdownEditor v-model="commentForm.body" class="min-h-[100px]" ref="commentEditorRef" placeholder="Speak your mind Spoc..."/>
                         <InputError :message="commentForm.errors.body" class="mt-2"/>
                     </div>
 
@@ -53,6 +53,8 @@ import TextArea from '@/Components/TextArea.vue'
 import InputError from '@/Components/InputError.vue'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
 import { useConfirm } from '@/Utilities/Composable/useConfirm.js'
+import { EditorContent } from '@tiptap/vue-3'
+import MarkdownEditor from '@/Components/MarkdownEditor.vue'
 
 const props = defineProps(['post', 'comments'])
 
