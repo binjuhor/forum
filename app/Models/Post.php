@@ -13,6 +13,10 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected static function booted()
+    {
+        static::saving(fn (self $post) => $post->fill(['html' => str($post->body)->markdown()]));
+    }
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -28,6 +32,13 @@ class Post extends Model
         return Attribute::set(fn ($value) => Str::title($value));
     }
 
+    protected function body(): Attribute
+    {
+        return Attribute::set(fn ($value) => [
+            'body' => $value,
+            'html' => str($value)->markdown(),
+        ]);
+    }
     public function showRoute(array $parameters = [])
     {
         return route('posts.show', [$this, Str::slug($this->title), ...$parameters]);
