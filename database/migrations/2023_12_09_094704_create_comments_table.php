@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
             $table->foreignIdFor(Post::class);
             $table->longText('body');
+            $table->longText('html');
             $table->timestamps();
         });
     }
