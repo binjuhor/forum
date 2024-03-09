@@ -24,7 +24,7 @@ it('cam gemerate additional query parameters on the show route', function () {
         ->toBe(route('posts.show', [$post, Str::slug($post->title), 'page' => 2]));
 });
 
-it('generate the html', function(){
+it('generate the html', function () {
     $post = Post::factory()->make([
         'body' => '## Hello world',
     ]);

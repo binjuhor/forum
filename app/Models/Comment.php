@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Comment extends Model
 {
-    use HasFactory;
     use ConvertMarkdownToHtml;
+    use HasFactory;
 
     public function post(): BelongsTo
     {

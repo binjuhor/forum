@@ -12,8 +12,8 @@ use Str;
 
 class Post extends Model
 {
-    use HasFactory;
     use ConvertMarkdownToHtml;
+    use HasFactory;
 
     public function user(): BelongsTo
     {
@@ -37,6 +37,7 @@ class Post extends Model
             'html' => str($value)->markdown(),
         ]);
     }
+
     public function showRoute(array $parameters = [])
     {
         return route('posts.show', [$this, Str::slug($this->title), ...$parameters]);

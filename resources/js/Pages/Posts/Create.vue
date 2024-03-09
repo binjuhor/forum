@@ -11,8 +11,22 @@
 
                 <div class="mt-3">
                     <InputLabel for="body" value="Body" class="sr-only" />
-                    <MarkdownEditor v-model="form.body" />
-                    <TextArea id="body" rows="25" class="w-full mt-4" v-model="form.body" placeholder="Write your post..."/>
+                    <MarkdownEditor v-model="form.body">
+                        <template #toolbar="{ editor }">
+                            <li>
+                                <button
+                                    @click="autofill"
+                                    type="button"
+                                    class="px-3 py-2 hover:bg-gray-200"
+                                    :class="{
+                                        'bg-gray-200': editor.isActive('heading' , { level: 4 })
+                                    }"
+                                >
+                                    <i class="ri-article-line"></i>
+                                </button>
+                            </li>
+                        </template>
+                    </MarkdownEditor>
                     <InputError :message="form.errors.body" class="mt-2" />
                 </div>
 
@@ -44,4 +58,9 @@ const form = useForm({
 })
 
 const createPost = () => form.post(route('posts.store'))
+
+const autofill = () => {
+    form.title = 'My first post'
+    form.body = 'This is the body of my first post'
+}
 </script>

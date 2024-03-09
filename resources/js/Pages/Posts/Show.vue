@@ -62,14 +62,14 @@ const commentForm = useForm({
     body: '',
 })
 
-const commentTextAreaRef = ref(null)
+const commentEditorRef = ref(null)
 const commentIdBeingEdited = ref(null)
 const commentBeingEdit = computed(() => props.comments.data.find(comment => comment.id === commentIdBeingEdited.value))
 
 const editComment = (commentId) => {
     commentIdBeingEdited.value = commentId
     commentForm.body = commentBeingEdit.value?.body
-    commentTextAreaRef.value?.focus()
+    commentEditorRef.value?.focus()
 }
 
 const cancelEditComment = () => {
