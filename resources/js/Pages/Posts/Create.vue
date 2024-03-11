@@ -13,7 +13,7 @@
                     <InputLabel for="body" value="Body" class="sr-only" />
                     <MarkdownEditor v-model="form.body">
                         <template #toolbar="{ editor }">
-                            <li >
+                            <li v-if="!isProduction">
                                 <button
                                     @click="autofill"
                                     type="button"
