@@ -13,7 +13,7 @@
                     <InputLabel for="body" value="Body" class="sr-only" />
                     <MarkdownEditor v-model="form.body">
                         <template #toolbar="{ editor }">
-                            <li>
+                            <li >
                                 <button
                                     @click="autofill"
                                     type="button"
@@ -50,7 +50,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue'
 import TextInput from '@/Components/TextInput.vue'
 import Container from '@/Components/Container.vue'
 import MarkdownEditor from '@/Components/MarkdownEditor.vue'
-import TextArea from '@/Components/TextArea.vue'
+import { isProduction } from '@/Utilities/environment.js'
 
 const form = useForm({
     title: '',
@@ -58,9 +58,14 @@ const form = useForm({
 })
 
 const createPost = () => form.post(route('posts.store'))
+const autofill = async () => {
 
-const autofill = () => {
-    form.title = 'My first post'
-    form.body = 'This is the body of my first post'
+    if (isProduction) {
+        return
+    }
+
+    const response = await axios.get('/local/post-content')
+    form.title = response.data.title
+    form.body = response.data.body
 }
 </script>

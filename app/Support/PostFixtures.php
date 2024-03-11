@@ -2,15 +2,22 @@
 
 namespace App\Support;
 
-use App\Models\Post;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\File;
+use Symfony\Component\Finder\SplFileInfo;
 
 class PostFixtures
 {
-    private static Collection $fixture;
+    private static Collection $fixtures;
 
-    public function getFixture(): Collection
+    public static function getFixtures(): Collection
     {
-        return self::$fixture ??= $this->withFixture()->make()->mapInto(Post::class);
+        return self::$fixtures ??= collect(File::files(database_path('factories/fixtures/posts')))
+            ->map(fn (SplFileInfo $file) => $file->getContents())
+            ->map(fn (string $contents) => str($contents)->explode("\n", 2))
+            ->map(fn (Collection $parts) => [
+                'title' => str($parts->first())->trim()->after('# '),
+                'body' => str($parts->last())->trim(),
+            ]);
     }
 }
