@@ -10,6 +10,8 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class PostFactory extends Factory
 {
+    private static Collection $fixtures;
+
     public function definition(): array
     {
         return [
@@ -21,8 +23,7 @@ class PostFactory extends Factory
 
     public function withFixture(): static
     {
-        $posts = collect(File::files(database_path('factories/fixtures/posts')))
-            ->map(fn (SplFileInfo $file) => $file->getContents())
+        $posts = static::getFixtures()
             ->map(fn (string $contents) => str($contents)->explode("\n", 2))
             ->map(fn (Collection $parts) => [
                 'title' => $parts->first(),
@@ -30,5 +31,11 @@ class PostFactory extends Factory
             ]);
 
         return $this->sequence(...$posts);
+    }
+
+    private static function getFixtures(): Collection
+    {
+        return self::$fixtures ??= collect(File::files(database_path('factories/fixtures/posts')))
+            ->map(fn (SplFileInfo $file) => $file->getContents());
     }
 }
