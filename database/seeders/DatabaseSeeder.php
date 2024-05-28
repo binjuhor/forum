@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(TopicSeeder::class);;
+        $this->call(TopicSeeder::class);
         $topics = Topic::all();
 
         $users = User::factory(10)->create();

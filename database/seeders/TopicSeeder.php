@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Topic;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class TopicSeeder extends Seeder
@@ -38,7 +37,7 @@ class TopicSeeder extends Seeder
                 'slug' => 'news',
                 'name' => 'News',
                 'description' => 'What\'s happening in the world of movies? Find out here.',
-            ]
+            ],
         ];
 
         Topic::upsert($data, ['slug']);
