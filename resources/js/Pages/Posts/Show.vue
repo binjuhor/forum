@@ -1,6 +1,7 @@
 <template>
     <AppLayout :title="post.title">
         <Container>
+            <Pill :href="route('posts.index', {topic: post.topic.slug})" class="mb-4">{{ post.topic.name }}</Pill>
             <PageHeading>{{ post.title }}</PageHeading>
             <span class="block mt-1 text-sm text-gray-600">{{ formattedDate }} ago by {{ post.user.name }}</span>
 
@@ -54,6 +55,7 @@ import { useConfirm } from '@/Utilities/Composable/useConfirm.js'
 import { EditorContent } from '@tiptap/vue-3'
 import MarkdownEditor from '@/Components/MarkdownEditor.vue'
 import PageHeading from '@/Components/PageHeading.vue'
+import Pill from '@/Components/Pill.vue'
 
 const props = defineProps(['post', 'comments'])
 
