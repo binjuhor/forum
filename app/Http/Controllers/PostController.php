@@ -6,6 +6,8 @@ use App\Http\Requests\PostRequest;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Models\Topic;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -16,10 +18,16 @@ class PostController extends Controller
         $this->authorizeResource(Post::class);
     }
 
-    public function index()
+    public function index(Topic $topic = null)
     {
+        $posts = Post::with(['user', 'topic'])
+            ->when($topic, fn (Builder $query) => $query->whereBelongsTo($topic ))
+            ->latest()
+            ->latest('id')
+            ->paginate();
+
         return inertia('Posts/Index', [
-            'posts' => PostResource::collection(Post::with(['user', 'topic'])->latest()->latest('id')->paginate()),
+            'posts' => PostResource::collection($posts),
         ]);
     }
 
