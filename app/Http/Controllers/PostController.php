@@ -19,17 +19,18 @@ class PostController extends Controller
         $this->authorizeResource(Post::class);
     }
 
-    public function index(Topic $topic = null)
+    public function index(?Topic $topic = null)
     {
         $posts = Post::with(['user', 'topic'])
-            ->when($topic, fn (Builder $query) => $query->whereBelongsTo($topic ))
+            ->when($topic, fn (Builder $query) => $query->whereBelongsTo($topic))
             ->latest()
             ->latest('id')
             ->paginate();
 
         return inertia('Posts/Index', [
             'posts' => PostResource::collection($posts),
-            'selectedTopic' => fn() => $topic ? TopicResource::make($topic) : null,
+            'topics' => fn () => TopicResource::collection(Topic::all()),
+            'selectedTopic' => fn () => $topic ? TopicResource::make($topic) : null,
         ]);
     }
 
