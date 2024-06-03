@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Resources\PostResource;
+use App\Http\Resources\TopicResource;
 use App\Models\Post;
 use App\Models\Topic;
 use Inertia\Testing\AssertableInertia;
@@ -34,3 +35,12 @@ it('it can filter a topic', function () {
     get(route('posts.index', ['topic' => $general]))
         ->assertHasPaginatedResource('posts', PostResource::collection($posts->reverse()));
 });
+
+it('passed the selected topic to the view', function () {
+    $topic = Topic::factory()->create();
+
+    get(route('posts.index', ['topic' => $topic]))
+        ->assertHasResource('selectedTopic', TopicResource::make($topic));
+});
+
+

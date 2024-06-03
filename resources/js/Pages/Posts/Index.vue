@@ -1,7 +1,12 @@
 <template>
     <AppLayout title="Post list">
         <Container>
-            <ul class="divide-y">
+            <div class="px-4">
+                <Link v-if="selectedTopic" :href="route('posts.index')" class="text-indigo-500 hover:text-indigo-700 mb-2 text-sm">Back to all Posts</Link>
+                <PageHeading v-text="selectedTopic ? selectedTopic.name : 'All Posts'" />
+                <p v-if="selectedTopic" class="mt-1 text-gray-600 text-sm">{{ selectedTopic.description }}</p>
+            </div>
+            <ul class="divide-y mt-4">
                 <li v-for="post in posts.data" :key="post.id" class="flex justify-between flex-col md:flex-row items-baseline px-2">
                     <Link :href="post.routes.show" class="px-2 py-4 block group">
                         <span class="text-bold text-lg group-hover:text-indigo-500">{{ post.title }} </span>
@@ -24,12 +29,19 @@ import Container from "@/Components/Container.vue";
 import Pagination from "@/Components/Pagination.vue";
 import { Link } from '@inertiajs/vue3'
 import {relativeDate} from "@/Utilities/date.js";
+import PageHeading from '@/Components/PageHeading.vue';
 
 defineProps({
     posts: {
         type: Array,
         required: true,
     },
+    selectedTopic: {
+        id: Number,
+        slug: String,
+        name: String,
+        description: String,
+    }
 })
 
 const formattedDate = (post) => relativeDate(post.created_at);
