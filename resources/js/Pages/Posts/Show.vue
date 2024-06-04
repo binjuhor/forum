@@ -32,7 +32,7 @@
                     </li>
                 </ul>
 
-                <Pagination :meta="comments.meta"/>
+                <Pagination :meta="comments.meta" :only="['comments']"/>
             </div>
         </Container>
     </AppLayout>
@@ -107,7 +107,12 @@ const deleteComment = async (commentId) => {
         return
     }
 
-    router.delete(route('comments.destroy', { comment: commentId, page: props.comments.meta.current_page }), {
+    router.delete(route('comments.destroy', {
+        comment: commentId,
+        page: props.comments.data.length > 1
+            ? props.comments.meta.current_page
+            : Math.max(props.comments.meta.current_page - 1, 1),
+    }), {
     preserveScroll: true,
 })}
 </script>

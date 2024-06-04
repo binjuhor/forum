@@ -200,7 +200,7 @@ defineExpose({ focus: () => editor.value?.commands.focus() })
 
 
 onMounted(() => {
-    watch(() => model, ({ value }) => {
+    watch(() => model, (value) => {
         if(value === editor.value?.storage.markdown.getMarkdown()) {
             return;
         }
