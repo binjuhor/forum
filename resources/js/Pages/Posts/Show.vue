@@ -8,6 +8,10 @@
             <PageHeading>{{ post.title }}</PageHeading>
             <span class="block mt-1 text-sm text-gray-600">{{ formattedDate }} by {{ post.user.name }}</span>
 
+            <div class="mt-4">
+                <span class="text-pink-500 font-bold">{{ post.likes_count }} likes</span>
+            </div>
+
             <article class="mt-6 prose prose-sm max-w-none" v-html="post.html"></article>
 
             <div class="mt-12">
@@ -51,11 +55,9 @@ import Comment from '@/Components/Comment.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
 import { router, useForm, Head } from '@inertiajs/vue3'
-import TextArea from '@/Components/TextArea.vue'
 import InputError from '@/Components/InputError.vue'
 import SecondaryButton from '@/Components/SecondaryButton.vue'
 import { useConfirm } from '@/Utilities/Composable/useConfirm.js'
-import { EditorContent } from '@tiptap/vue-3'
 import MarkdownEditor from '@/Components/MarkdownEditor.vue'
 import PageHeading from '@/Components/PageHeading.vue'
 import Pill from '@/Components/Pill.vue'
