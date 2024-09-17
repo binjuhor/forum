@@ -36,7 +36,7 @@ it('redirects to the post show page with the page query parameter', function () 
         ->assertRedirect($comment->post->showRoute(['page' => 2]));
 });
 
-it('prevents deleting a comment you didnt create', function () {
+it('prevents deleting a comment you didn\'t create', function () {
     $comment = Comment::factory()->create();
 
     actingAs(User::factory()->create())

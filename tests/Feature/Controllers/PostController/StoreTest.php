@@ -5,6 +5,7 @@ use App\Models\Topic;
 use App\Models\User;
 
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\post;
 
 beforeEach(function () {
     $this->validData = fn () => [
@@ -12,6 +13,10 @@ beforeEach(function () {
         'topic_id' => Topic::factory()->create()->getKey(),
         'body' => str_repeat('a', 100),
     ];
+});
+
+it('requires authentication', function () {
+    post(route('posts.store')->assertRedirect(route('login')));
 });
 
 it('store a post', function () {
