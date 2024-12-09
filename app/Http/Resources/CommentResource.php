@@ -21,7 +21,7 @@ class CommentResource extends JsonResource
             'post' => PostResource::make($this->whenLoaded('post')),
             'body' => $this->body,
             'html' => $this->html,
-            'likes_count' => Number::abbreviate($this->likes_count),
+            'likes_count' => Number::abbreviate($this->likes_count ?? 0),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'can' => [

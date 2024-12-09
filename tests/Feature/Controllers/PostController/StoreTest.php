@@ -16,7 +16,7 @@ beforeEach(function () {
 });
 
 it('requires authentication', function () {
-    post(route('posts.store')->assertRedirect(route('login')));
+    post(route('posts.store'))->assertRedirect(route('login'));
 });
 
 it('store a post', function () {
