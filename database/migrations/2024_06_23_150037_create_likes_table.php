@@ -18,7 +18,7 @@ return new class extends Migration
             $table->morphs('likeable');
             $table->timestamps();
 
-            $table->unique(['user_id', 'likeable_id', 'likeable_type']);
+            $table->unique(['user_id',  'likeable_type', 'likeable_id']);
         });
     }
 

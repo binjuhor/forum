@@ -42,7 +42,7 @@ Route::middleware([
         ->shallow()
         ->only(['store', 'update', 'destroy']);
 
-    Route::post('likes', [LikeController::class, 'store'])->name('likes.store');
+    Route::post('likes/{type}/{id}', [LikeController::class, 'store'])->name('likes.store');
 });
 
 Route::get('posts/{topic?}', [PostController::class, 'index'])->name('posts.index');
