@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Like;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,14 @@ class LikeController extends Controller
      */
     public function store(Request $request, string $type, int $id)
     {
-        $likeable = Relation::getMorphedModel($type)::findOrFail($id);
+        $modelName = Relation::getMorphedModel($type);
+
+        if (! $modelName) {
+            throw new ModelNotFoundException();
+        }
+
+        $likeable = $modelName::findOrFail($id);
+        $this->authorize('create', [Like::class, $likeable]);
 
         $likeable->likes()->firstOrCreate([
             'user_id' => $request->user()->id,

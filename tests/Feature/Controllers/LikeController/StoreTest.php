@@ -9,7 +9,7 @@ use function Pest\Laravel\post;
 use function Pest\Laravel\actingAs;
 
 it('requires authentication', function () {
-    post(route('likes.store'))->assertRedirect(route('login'));
+    post(route('likes.store', ['post', 1]))->assertRedirect(route('login'));
 });
 
 it('allows liking a likeable', function(Model $likeable) {
@@ -32,12 +32,25 @@ it('allows liking a likeable', function(Model $likeable) {
     fn () => Comment::factory()->create(),
 ]);
 
-it('prevents liking somethign you already liked', function () {
-//    $this->withoutExceptionHandling();
+it('prevents liking somethign you already l`iked', function () {
     $like = Like::factory()->create();
-    $likdable = $like->likeable;
+    $likedable = $like->likeable;
 
     actingAs($like->user)
-        ->post(route('likes.store', [$likdable->getMorphClass(), $likdable->id]))
+        ->post(route('likes.store', [$likedable->getMorphClass(), $likedable->id]))
         ->assertForbidden();
+});
+
+it('only allows liking supported models', function () {
+   $user = User::factory()->create();
+
+    actingAs($user)
+        ->post(route('likes.store', [$user->getMorphClass(), $user->id]))
+        ->assertForbidden();
+});
+
+it('throws a 404 if the type is unsupported', function () {
+   actingAs(User::factory()->create())
+         ->post(route('likes.store', ['unsupported', 1]))
+         ->assertNotFound();
 });
