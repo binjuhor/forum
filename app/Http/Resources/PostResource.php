@@ -19,7 +19,7 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'body' => $this->body,
             'html' => $this->html,
-            'likes_count' => Number::abbreviate($this->likes_count ?? 0),
+            'likes_count' => Number::abbreviate($this->likes_count),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'routes' => [

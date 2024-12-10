@@ -32,7 +32,7 @@ it('allows liking a likeable', function(Model $likeable) {
     fn () => Comment::factory()->create(),
 ]);
 
-it('prevents liking somethign you already l`iked', function () {
+it('prevents liking something you already liked', function () {
     $like = Like::factory()->create();
     $likedable = $like->likeable;
 
