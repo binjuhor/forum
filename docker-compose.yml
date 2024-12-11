@@ -1,0 +1,61 @@
+version: '3.3'
+
+services:
+  forum-db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '33008:3306'
+    expose:
+      - '3306'
+    volumes:
+      - forum-db:/var/lib/mysql
+
+  forum-laravel:
+    build: ./dockerfiles
+    depends_on:
+      - forum-db
+    volumes:
+      - ".:/var/www"
+      - "./dockerfiles/config/php/php-fpm.conf:/etc/php-fpm.conf"
+      - "./dockerfiles/config/php/www.conf:/etc/php-fpm.d/www.conf"
+      - "./dockerfiles/config/php/php.ini:/usr/local/etc/php/php.ini"
+      - "./dockerfiles/config/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
+    environment:
+      DB_DATABASE: '${DB_DATABASE}'
+      DB_USERNAME: '${DB_USERNAME}'
+      DB_PASSWORD: '${DB_PASSWORD}'
+      DB_HOST: '${DB_HOST}'
+      DB_PORT: '${DB_PORT}'
+
+  forum-nginx:
+    image: nginx:latest
+    depends_on:
+      - forum-laravel
+    volumes:
+      - ".:/var/www"
+      - "./dockerfiles/config/nginx/default.conf:/etc/nginx/conf.d/default.conf"
+    ports:
+      - "8081:80"
+    restart: always
+
+  forum-redis:
+    image: redis:6.2.5
+    depends_on:
+      - forum-laravel
+    volumes:
+      - forum-redis:/data
+    ports:
+      - '6378:6379'
+    expose:
+      - '6379'
+    restart: on-failure
+
+volumes:
+  forum-db:
+  forum-redis:

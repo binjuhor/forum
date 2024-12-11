@@ -1,7 +1,7 @@
-## Simple Forum App with Laravel 10.x
+## Simple Forum App with Laravel 11.x
 
-This is a simple forum app built with Laravel 10.x. to demonstrate the use of Laravel 10.x. It is a simple forum app where users can create topics and reply to topics.
-Practice with Laravel 10.x. & TDD
+This is a simple forum app built with Laravel 11.x. to demonstrate the use of Laravel 11.x. It is a simple forum app where users can create topics and reply to topics.
+Practice with Laravel 11.x. & TDD
 
 ## Requirements
 
@@ -29,7 +29,7 @@ Practice with Laravel 10.x. & TDD
 
 ## Techstack
 
-- Laravel 10.x
+- Laravel 11.x
 - Tailwindcss
 - Inertiajs
 - Vuejs 3
