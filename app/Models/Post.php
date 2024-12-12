@@ -9,12 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Laravel\Scout\Searchable;
 use Str;
 
 class Post extends Model
 {
     use ConvertMarkdownToHtml;
     use HasFactory;
+    use Searchable;
 
     public function user(): BelongsTo
     {
