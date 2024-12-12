@@ -5,14 +5,15 @@ use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use function Pest\Laravel\post;
+
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\post;
 
 it('requires authentication', function () {
     post(route('likes.store', ['post', 1]))->assertRedirect(route('login'));
 });
 
-it('allows liking a likeable', function(Model $likeable) {
+it('allows liking a likeable', function (Model $likeable) {
     $user = User::factory()->create();
 
     actingAs($user)
@@ -42,7 +43,7 @@ it('prevents liking something you already liked', function () {
 });
 
 it('only allows liking supported models', function () {
-   $user = User::factory()->create();
+    $user = User::factory()->create();
 
     actingAs($user)
         ->post(route('likes.store', [$user->getMorphClass(), $user->id]))
@@ -50,7 +51,7 @@ it('only allows liking supported models', function () {
 });
 
 it('throws a 404 if the type is unsupported', function () {
-   actingAs(User::factory()->create())
-         ->post(route('likes.store', ['unsupported', 1]))
-         ->assertNotFound();
+    actingAs(User::factory()->create())
+        ->post(route('likes.store', ['unsupported', 1]))
+        ->assertNotFound();
 });

@@ -62,14 +62,13 @@ class PostController extends Controller
         $post->load('user', 'topic');
 
         return inertia('Posts/Show', [
-            'post' => fn () => PostResource::make($post),
-            'comments' => fn () => CommentResource::collection(
-                $post->comments()
-                    ->latest()
-                    ->latest('id')
-                    ->with('user')
-                    ->paginate(10)
-            ),
+            'post' => fn () => PostResource::make($post)->withLikePermission(),
+            'comments' => function () use ($post) {
+                $commentResource = CommentResource::collection($post->comments()->with('user')->latest()->paginate());
+                $commentResource->collection->transform(fn ($comment) => $comment->withLikePermission());
+
+                return $commentResource;
+            },
         ]);
     }
 

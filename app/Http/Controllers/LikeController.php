@@ -27,7 +27,6 @@ class LikeController extends Controller
         return back();
     }
 
-
     /**
      * Remove the specified resource from storage.
      */
@@ -47,11 +46,12 @@ class LikeController extends Controller
         /** @var class-string<Model>|null $modelName */
         $modelName = Relation::getMorphedModel($type);
 
-        if (!$modelName) {
-            throw new ModelNotFoundException();
+        if (! $modelName) {
+            throw new ModelNotFoundException;
         }
 
         $likeable = $modelName::findOrFail($id);
+
         return $likeable;
     }
 }

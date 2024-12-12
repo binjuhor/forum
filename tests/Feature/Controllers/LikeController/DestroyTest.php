@@ -5,15 +5,15 @@ use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use function Pest\Laravel\delete;
-use function Pest\Laravel\post;
+
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\delete;
 
 it('requires authentication', function () {
     delete(route('likes.destroy', ['post', 1]))->assertRedirect(route('login'));
 });
 
-it('allows unliking a likeable', function(Model $likeable) {
+it('allows unliking a likeable', function (Model $likeable) {
     $user = User::factory()->create();
     Like::factory()->for($user)->for($likeable, 'likeable')->create();
 
@@ -39,7 +39,7 @@ it('prevents unliking something you already liked', function () {
 });
 
 it('only allows unliking supported models', function () {
-   $user = User::factory()->create();
+    $user = User::factory()->create();
 
     actingAs($user)
         ->delete(route('likes.destroy', [$user->getMorphClass(), $user->id]))
@@ -47,7 +47,7 @@ it('only allows unliking supported models', function () {
 });
 
 it('throws a 404 if the type is unsupported', function () {
-   actingAs(User::factory()->create())
-         ->delete(route('likes.destroy', ['unsupported', 1]))
-         ->assertNotFound();
+    actingAs(User::factory()->create())
+        ->delete(route('likes.destroy', ['unsupported', 1]))
+        ->assertNotFound();
 });
