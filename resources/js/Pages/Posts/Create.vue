@@ -11,8 +11,9 @@
 
         <div class="mt-3">
           <InputLabel for="topic_id" value="Topic" class="sr-only"/>
-          <select id="topic_id" v-model="form.topic_id"
-                  class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+          <select id="topic_id"
+            v-model="form.topic_id"
+            class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
             <option v-for="topic in topics" :key="topic.id" :value="topic.id">
               {{ topic.name }}
             </option>
@@ -29,8 +30,8 @@
                   type="button"
                   class="px-3 py-2 hover:bg-gray-200"
                   :class="{
-                                        'bg-gray-200': editor.isActive('heading' , { level: 4 })
-                                    }"
+                      'bg-gray-200': editor.isActive('heading' , { level: 4 })
+                  }"
                 >
                   <i class="ri-article-line"></i>
                 </button>
